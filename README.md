@@ -2,6 +2,19 @@
 
 ## Overview
 
+## PAGE TO TAKE COMPLAINTS BY CONSUMERS (MongoApp folder)
+This Page will be created using MongoDB, Node.js and ExpressJs. All the codes are included in a folder called MongoApp. 
+
+### Public Folder
+* Inside MongoApp, create a folder called: public
+  * Inside public, create an html file called ```index.html```
+  * Mobile-responsive design: To ensure proper rendering and touch zooming, add the ```<meta>``` tag inside the ```<head>``` element
+  * Inside ```index.html``` include bootstrap css framework [bootstrap](http://getbootstrap.com/getting-started/)
+  * Create the .container class to provide a responsive fixed width container.  
+  * Navabar: Create a Right-Aligned Navigation Bar
+#### Place Autocomplete Address Form
+* Inside index.html, create place autocomplete address form to capture consumers address/ location
+
 ## CHART RENDERING
 ## Things Required
 In order to render the manager's dashboard which contains various charts, the following are required:

@@ -65,10 +65,10 @@ exampleUser.save(function(error, doc) {
 // Routes
 // ======
 
-// Route to see notes we have added
+// Route to see complaints added
 app.get("/complaints", function(req, res) {
-  // Find all notes in the note collection with our Note model
-  Note.find({}, function(error, doc) {
+  // Find all complaints in the complaint collection with our Complaint model
+  Complaint.find({}, function(error, doc) {
     // Send any errors to the browser
     if (error) {
       res.send(error);
@@ -97,20 +97,20 @@ app.get("/user", function(req, res) {
 });
 
 
-// New note creation via POST route
+// New complaint creation via POST route
 app.post("/submit", function(req, res) {
-  // Use our Note model to make a new note from the req.body
-  var newNote = new Note(req.body);
-  // Save the new note to mongoose
-  newNote.save(function(error, doc) {
+  // Use our Complaint model to make a new complaint from the req.body
+  var newComplaint = new Complaint(req.body);
+  // Save the new complaint to mongoose
+  newComplaint.save(function(error, doc) {
     // Send any errors to the browser
     if (error) {
       res.send(error);
     }
     // Otherwise
     else {
-      // Find our user and push the new note id into the User's notes array
-      User.findOneAndUpdate({}, { $push: { "notes": doc._id } }, { new: true }, function(err, newdoc) {
+      // Find our user and push the new complaint id into the User's compalints array
+      User.findOneAndUpdate({}, { $push: { "complaints": doc._id } }, { new: true }, function(err, newdoc) {
         // Send any errors to the browser
         if (err) {
           res.send(err);
@@ -128,8 +128,8 @@ app.post("/submit", function(req, res) {
 app.get("/populateduser", function(req, res) {
   // Prepare a query to find all users..
   User.find({})
-    // ..and on top of that, populate the notes (replace the objectIds in the notes array with bona-fide notes)
-    .populate("notes")
+    // ..and on top of that, populate the complaints (replace the objectIds in the complaints array with bona-fide complaints)
+    .populate("complaints")
     // Now, execute the query
     .exec(function(error, doc) {
       // Send any errors to the browser

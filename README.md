@@ -48,6 +48,13 @@ Here we use Bootstrap 3 Datepicker [Bootstrap Datepicker](http://eonasdan.github
 * Create a new user by using the User model as a class - The "unique" rule in the User model's schema will prevent duplicate users from being added to the server - This uses the save method.
 
 ### Routes
+Creating routes for our model.
+* Use GET method to
+  * Create a route to see complaints users have added
+  * Create a route to see what user looks like without populating
+* Use POST method to
+  * Create new complaint
+* Use GET route to see what user looks like WITH populating
 
 ## CHART RENDERING
 ## Things Required

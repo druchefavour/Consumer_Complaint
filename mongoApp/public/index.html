@@ -4,7 +4,9 @@
 	<title>Log Consumer Complaint</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+	<!-- Include google API css -->
+	<link rel="stylesheet" type="text/css" href="css/addressStyle.css">
+	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 	<!-- Include Bootstrap -->
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -13,6 +15,7 @@
 
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
   <nav class="navbar navbar-inverse">
@@ -32,18 +35,81 @@
     </div>
   </nav>
   <div class="container">
+   <form action="/submit" method="post">
     <div class="row">
-     <div class="col-sm-4">
+     <div class="col-sm-7">
        <div class="panel panel-default">
-         <div class="panel-heading">User Profile</div>
-         <div class="panel-body">Panel Content</div>
+        <div class="panel-heading">User Profile</div>
+         <div class="panel-body">
+           <div class="row">
+             <div class="form-group">
+	           <div class="col-xs-3">
+	             <label for="title">Title</label>
+	             <select class="form-control" id="title-input">
+	             <option value="" disabled selected hidden>Title</option>
+	             <option value="1">Mr</option>
+	             <option>Mrs</option>
+	             <option>Ms</option>
+	             <option>Dr</option>
+	             </select> 
+	           </div>
+
+             <div class="col-xs-4">
+               <label for="firstname">Firstname</label>
+               <input class="form-control" id="firstname-input" type="text" placeholder="Firstname">
+			 </div>
+			 <div class="col-xs-5">
+			  <label for="ex3">Lastname</label>
+			  <input class="form-control" id="lastname-input" type="text" placeholder="Lastname">
+			 </div>
+			</div> 
+		   </div>
+		   <hr>
+		   <div class="form-group">
+	         <label for="Login-time">ComplaintTime (date and time):</label>
+             <input class="form-control" type="datetime-local" name="complainttime">
+		   </div>
+		   
+		   <div>
+		   	<h5>Address</h5>
+		   </div
+           <!-- Place Auto Complete Form-->
+           <div id="locationField">
+             <input id="autocomplete" placeholder="Enter your address"
+             onFocus="geolocate()" type="text"></input>
+           </div>
+           <table id="address">
+             <tr>
+               <td class="label">Street address</td>
+               <td class="slimField"><input class="field" id="street_number" disabled="true"></input></td>
+               <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"></input></td>
+             </tr>
+             <tr>
+               <td class="label">City</td>
+               <!-- Note: Selection of address components in this example is typical.
+               You may need to adjust it for the locations relevant to your app. See
+               https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform-->
+               <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true"></input></td>
+             </tr>
+		     <tr>
+		       <td class="label">State</td>
+		       <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"></input></td>
+		       <td class="label">Zip code</td>
+		       <td class="wideField"><input class="field" id="postal_code" disabled="true"></input></td>
+		     </tr>
+		     <tr>
+		       <td class="label">Country</td>
+		       <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"></input></td>
+		     </tr>
+		    </table>
+         </div>
        </div>
      </div>
 
-     <div class="col-sm-4">
+     <div class="col-sm-5">
        <div class="panel panel-default">
-         <div class="panel-heading">Complain Data</div>
-         <div class="panel-body">
+         <div class="panel-heading">Complaint Data</div>
+          <div class="panel-body">
            <div class="form-group">
              <label for="Company">Select Business You Want To Complain About:</label>
              <select class="form-control" id="company-input">
@@ -77,16 +143,23 @@
                <option>Student Loan</option>
              </select>
            </div>
+           <div class="form-group">
+             <label for="complaint-title">Enter Your Complaint</label>
+			  <input class="form-control" id="complaint-title-input" type="text" placeholder="Complaint Title">
+		   </div>
+		   <div class="form-group">
+			<textarea class="form-control" id="complaint-input"type="text" placeholder="Write Complaint Here" rows="15" cols="50" id="aboutDescription" style="resize: none;" data-role="none"></textarea>
+		   </div>
+          </div>
          </div>
        </div>
      </div>
-     <div class="col-sm-4">
-       <div class="panel panel-default">
-         <div class="panel-heading">User Profile</div>
-         <div class="panel-body">Panel Content</div>
-       </div>
-     </div>
     </div>
+   </form>
+   
   </div>
+  <script src="js/addressScript.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuP_cA1GmF-eWrNqPAtCIw6J-m2MFrFQ&libraries=places&callback=initAutocomplete"
+        async defer></script>
 </body>
 </html>

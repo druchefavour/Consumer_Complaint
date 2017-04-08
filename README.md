@@ -13,7 +13,11 @@ This Page will be created using MongoDB, Node.js and ExpressJs. All the codes ar
   * Create the .container class to provide a responsive fixed width container.  
   * Navabar: Create a Right-Aligned Navigation Bar
 #### Place Autocomplete Address Form
-* Inside index.html, create place autocomplete address form to capture consumers address/ location
+* Inside ```index.html```, create place autocomplete address form to capture consumers address/ location (use [Google Maps APIs](https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform#try-it-yourself))
+* Create a css folder
+  * Inside the css folder create the file ```addressStyle.css```
+* Create a js folder
+  * Inside the js folder create the file ```addressScript.css```
 
 ## CHART RENDERING
 ## Things Required

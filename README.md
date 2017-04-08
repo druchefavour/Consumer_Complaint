@@ -28,13 +28,26 @@ Here we use Bootstrap 3 Datepicker [Bootstrap Datepicker](http://eonasdan.github
 * include moment.js
 * Use the [enabled/disabled dates](http://eonasdan.github.io/bootstrap-datetimepicker/#enableddisabled-dates) code to create the datetimepicker.
 
-## Creating Database for loading Consumer Complaint 
+## Creating MongoDB for loading Consumer Complaint 
 * Create a models folder
 * Inside the folder, create two models one for loading user information - ```user.js``` and the other for loading the complaint data- ```complaint.js```.
 * ```user.js``` will take the following parameters: firstname, lastname, useremail, logintime, and useraddress
 * ```complaint.js``` will take the following parameters: companyname, productname, complainttitle and complaintinput
 
-* Create ```server.js```
+* Create ```server.js```.
+* Inside ```server.js```, require the dependencies: express, bodyParser, morgan and mongoose
+* Include the Models: Complaint and User
+* Set mongoose to leverage built in JavaScript ES6 Promises
+* Initialize Express
+* Use morgan and body parser with the app
+* Make public a static dir
+* Create mongo database called consumerCompdb.
+* Configure database with mongoose
+* Write a script to show any mongoose errors
+* Write a script that once logged in to the db through mongoose, a success message would be logged
+* Create a new user by using the User model as a class - The "unique" rule in the User model's schema will prevent duplicate users from being added to the server - This uses the save method.
+
+### Routes
 
 ## CHART RENDERING
 ## Things Required

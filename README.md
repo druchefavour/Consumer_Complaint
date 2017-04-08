@@ -29,6 +29,12 @@ Here we use Bootstrap 3 Datepicker [Bootstrap Datepicker](http://eonasdan.github
 * Use the [enabled/disabled dates](http://eonasdan.github.io/bootstrap-datetimepicker/#enableddisabled-dates) code to create the datetimepicker.
 
 ## Creating Database for loading Consumer Complaint 
+* Create a models folder
+* Inside the folder, create two models one for loading user information - ```user.js``` and the other for loading the complaint data- ```complaint.js```.
+* ```user.js``` will take the following parameters: firstname, lastname, useremail, logintime, and useraddress
+* ```complaint.js``` will take the following parameters: companyname, productname, complainttitle and complaintinput
+
+* Create ```server.js```
 
 ## CHART RENDERING
 ## Things Required

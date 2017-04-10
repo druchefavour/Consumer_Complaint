@@ -82,7 +82,7 @@ Other processes required include:
   * To create REST API for data retrieval
   * To create views for rendering the chart
 
-# Import Data
+## Import Data
 The MongoDB created is a JSON based document store, the data to be populated is created in the form of an array of JSON objects. 
 
 To populate this data into the MongoDB we make use of another tool called: mongoimport provided by MongoDB. 
@@ -94,5 +94,17 @@ location of the file containing data (--file complaint.json)
 option to indicate input is JSON array (--jsonArray)
 
 ```$ mongoimport -d dataCompdb -c Logged Complaints --type json --file complaint.json --jsonArray```
+
+## Validation
+Confirm if the data really got inserted by running a few queries:
+> use dataCompdb                                    
+switched to db dataCompdb
+> show collections
+logged_complaints
+system.indexes
+> db.logged_complaints.find();
+This displays the data in the database:
+![Image of Database](https://octodex.github.com/images/yaktocat.png)
+
 
 

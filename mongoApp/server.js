@@ -8,8 +8,8 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 
 // Bring in our Models: Complaint and User
-var Note = require("./models/complaint.js");
-var User = require("./models/user.js");
+var Complaint = require("./models/Complaint.js");
+var User = require("./models/User.js");
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
@@ -92,15 +92,14 @@ app.get("/user", function(req, res) {
     // Or send the doc to the browser
     else {
       res.send(doc);
-    }
+    } 
   });
 });
-
 
 // New complaint creation via POST route
 app.post("/submit", function(req, res) {
   // Use our Complaint model to make a new complaint from the req.body
-  var newComplaint = new Complaint(req.body);
+  var newComplaint = new Complaint(req.complaintinput);
   // Save the new complaint to mongoose
   newComplaint.save(function(error, doc) {
     // Send any errors to the browser
@@ -110,7 +109,7 @@ app.post("/submit", function(req, res) {
     // Otherwise
     else {
       // Find our user and push the new complaint id into the User's compalints array
-      User.findOneAndUpdate({}, { $push: { "complaints": doc._id } }, { new: true }, function(err, newdoc) {
+      User.findOneAndUpdate({}, { $push: {"complaints": doc._id } }, { new: true }, function(err, newdoc) {
         // Send any errors to the browser
         if (err) {
           res.send(err);
@@ -142,7 +141,6 @@ app.get("/populateduser", function(req, res) {
       }
     });
 });
-
 
 // Listen on Port 3000
 app.listen(3000, function() {

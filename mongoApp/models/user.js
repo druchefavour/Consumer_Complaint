@@ -24,13 +24,13 @@ var UserSchema = new Schema({
   },
   useraddress: {
     type: String
-  }
-  // notes property for the user
-  complaint: [{
+  },
+  // complaints property for the user
+  complaints: [{
     // Store ObjectIds in the array
     type: Schema.Types.ObjectId,
-    // The ObjectIds will refer to the ids in the Note model
-    ref: "Complaints"
+    // The ObjectIds will refer to the ids in the Complaint model
+    ref: "Complaint"
   }]
 });
 

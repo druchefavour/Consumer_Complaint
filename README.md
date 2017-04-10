@@ -56,6 +56,17 @@ Creating routes for our model.
   * Create new complaint
 * Use GET route to see what user looks like WITH populating
 
+### Running program
+* run npm init to create package.json file
+* Install dependencies
+  * Express
+  * Bodyparser
+  * Morgan
+  * Mongoose
+  * This will create node modules file
+* run app (node ```server.js```) and listen at port 3000
+
+
 ## CHART RENDERING
 ## Things Required
 In order to render the manager's dashboard which contains various charts, the following are required:
@@ -70,4 +81,18 @@ Other processes required include:
   * To populate data in MongoDB
   * To create REST API for data retrieval
   * To create views for rendering the chart
-  * and to download the source code
+
+# Import Data
+The MongoDB created is a JSON based document store, the data to be populated is created in the form of an array of JSON objects. 
+
+To populate this data into the MongoDB we make use of another tool called: mongoimport provided by MongoDB. 
+
+name of the database (-d dataCompdb)
+name of the collection (-c Logged Complaints)
+type of the input data (--type json)
+location of the file containing data (--file complaint.json)
+option to indicate input is JSON array (--jsonArray)
+
+```$ mongoimport -d dataCompdb -c Logged Complaints --type json --file complaint.json --jsonArray```
+
+

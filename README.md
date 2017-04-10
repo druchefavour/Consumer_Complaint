@@ -104,7 +104,7 @@ logged_complaints
 system.indexes
 > db.logged_complaints.find();
 This displays the data in the database:
-![Image of Database](https://octodex.github.com/images/yaktocat.png)
+![Image of Database](https://github.com/druchefavour/Consumer_Complaint/blob/master/mongoApp/public/image/datbase_pic.PNG)
 
 
 

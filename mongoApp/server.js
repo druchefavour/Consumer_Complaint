@@ -7,6 +7,9 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
+//import mongodb package
+var mongodb = require("mongodb");
+
 // Bring in our Models: Complaint and User
 var Complaint = require("./models/Complaint.js");
 var User = require("./models/User.js");
@@ -38,6 +41,70 @@ db.on("error", function(error) {
 // Once logged in to the db through mongoose, log a success message
 db.once("open", function() {
   console.log("Mongoose connection successful.");
+});
+
+//MongoDB connection URL - mongodb://host:port/dbName
+
+var dbHost = "mongodb://localhost/dataCompdb";
+     
+//Use the MongoClient to connect to the db as shown below:
+//DB Object
+var dbObject;
+     
+//get instance of MongoClient to establish connection
+var MongoClient = mongodb.MongoClient;
+     
+//Connecting to the Mongodb instance.
+//Make sure your mongodb daemon mongod is running on port 27017 on localhost
+MongoClient.connect(dbHost, function(err, db){
+      if ( err ) throw err;
+      dbObject = db;
+    });
+
+// implement the fetch db method to extract categories array as well as data set very easily.
+function getData(){
+      //use the find() API and pass an empty query object to retrieve all records
+      dbObject.collection("logged_complaints").find({}).toArray(function(err, docs){
+        if ( err ) throw err;
+        var monthArray = [];
+        var loggedComplaints = [];
+        var resolvedComplaints = [];
+     
+        for ( index in docs){
+          var doc = docs[index];
+          //category array
+          var month = doc['month'];
+          //series 1 values array
+          var logged = doc['Logged Complaints'];
+          //series 2 values array
+          var resolved = doc['Resolved Complaints'];
+          monthArray.push({"label": month});
+          loggedComplaints.push({"value" : logged});
+          resolvedComplaints.push({"value" : resolved});
+        }
+     
+        var dataset = [
+          {
+            "seriesname" : "Logged Complaints",
+            "data" : loggedComplaints
+          },
+          {
+            "seriesname" : "Resolved Complaints",
+            "data": resolvedComplaints
+          }
+        ];
+     
+        var response = {
+          "dataset" : dataset,
+          "categories" : monthArray
+        };
+      });
+    }
+
+//create express app and get logged complaints for charting
+//var app = express();
+app.get("/loggedComplaints", function(request, response){
+  getData(response);
 });
 
 

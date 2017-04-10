@@ -97,14 +97,34 @@ option to indicate input is JSON array (--jsonArray)
 
 ## Validation
 Confirm if the data really got inserted by running a few queries:
-> use dataCompdb                                    
-switched to db dataCompdb
-> show collections
-logged_complaints
-system.indexes
-> db.logged_complaints.find();
+  * > use dataCompdb                                    
+   switched to db dataCompdb
+  * > show collections
+   logged_complaints
+   system.indexes
+  * > db.logged_complaints.find();
 This displays the data in the database:
 ![Image of Database](https://github.com/druchefavour/Consumer_Complaint/blob/master/mongoApp/public/image/datbase_pic.PNG)
+
+## Creating REST API for data retrieval
+Now we have the required data in our db. Let us create REST API using ExpressJS to consume the data from MongoDB.
+
+Install mongodb by using the command: $ npm install mongodb
+
+In order to develop the REST API, we follow the steps below:
+  * Import the express and mongodb packages to be used in the application
+  * Connect to MongoDB instance running locally
+  * Implement method to fetch the data from Database
+    * While we implement the method to fetch db, we also need to parse and construct the object so that we are able to use it for rendering the multi series line chart. The multi series line chart we are going to draw requires an array of labels, multiple arrays of values where each array indicates a series:
+     * We have to transform the series into the form which will help us bind to the chart
+
+  * Create express server and REST API end-point
+    * We expose the REST API at the URL /loggedComplaints. We will modify the getData() method by adding an additional parameter to the method. This additional parameter is the response object. We are going to write the JSON object created in getData() method to the response object so that it is sent to the client invoking the API.
+  * Launch the express app on a port
+
+  The server is up on http://localhost:3300 and when we open the URL http://localhost:3300/loggedCompaints in the browser, we find the JSON response of the API.
+
+
 
 
 

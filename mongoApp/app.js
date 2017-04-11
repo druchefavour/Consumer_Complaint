@@ -86,22 +86,22 @@ function getData(){
     }
 
 //create express app and get logged complaints for charting
-var app = express();
+var app1 = express();
 // Make public a static dir
-app.use(express.static("public"));
+app1.use(express.static("public"));
 
 // Routes
 // 1. At the root path, send a simple hello world message to the browser
-app.get("/", function(req, res) {
+app1.get("/", function(req, res) {
   res.send("Hello world");
 });
 
 
-app.get("/loggedComplaints", function(req, res){
+app1.get("/loggedComplaints", function(req, res){
   getData(res);
 });
 
 // Listen on Port 3000
-app.listen(3300, function() {
-  console.log("App running on port 3300!");
+app1.listen(3300, function() {
+  console.log("App1 running on port 3300!");
 });

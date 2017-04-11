@@ -18,20 +18,21 @@ var User = require("./models/User.js");
 mongoose.Promise = Promise;
 
 // Initialize Express
-var app = express();
+var app0 = express();
 
 // Use morgan and body parser with our app
-app.use(logger("dev"));
-app.use(bodyParser.urlencoded({
+app0.use(logger("dev"));
+app0.use(bodyParser.urlencoded({
   extended: false
 }));
 
 // Make public a static dir
-app.use(express.static("public"));
+app0.use(express.static("public"));
 
 // Database configuration with mongoose
 mongoose.connect("mongodb://localhost/consumerCompdb");
 var db = mongoose.connection;
+// ------------------------------------------------
 
 // Show any mongoose errors
 db.on("error", function(error) {
@@ -42,72 +43,6 @@ db.on("error", function(error) {
 db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
-
-//MongoDB connection URL - mongodb://host:port/dbName
-
-var dbHost = "mongodb://localhost/dataCompdb";
-     
-//Use the MongoClient to connect to the db as shown below:
-//DB Object
-var dbObject;
-     
-//get instance of MongoClient to establish connection
-var MongoClient = mongodb.MongoClient;
-     
-//Connecting to the Mongodb instance.
-//Make sure your mongodb daemon mongod is running on port 27017 on localhost
-MongoClient.connect(dbHost, function(err, db){
-      if ( err ) throw err;
-      dbObject = db;
-    });
-
-// implement the fetch db method to extract categories array as well as data set very easily.
-function getData(){
-      //use the find() API and pass an empty query object to retrieve all records
-      dbObject.collection("logged_complaints").find({}).toArray(function(err, docs){
-        if ( err ) throw err;
-        var monthArray = [];
-        var loggedComplaints = [];
-        var resolvedComplaints = [];
-     
-        for ( index in docs){
-          var doc = docs[index];
-          //category array
-          var month = doc['month'];
-          //series 1 values array
-          var logged = doc['Logged Complaints'];
-          //series 2 values array
-          var resolved = doc['Resolved Complaints'];
-          monthArray.push({"label": month});
-          loggedComplaints.push({"value" : logged});
-          resolvedComplaints.push({"value" : resolved});
-        }
-     
-        var dataset = [
-          {
-            "seriesname" : "Logged Complaints",
-            "data" : loggedComplaints
-          },
-          {
-            "seriesname" : "Resolved Complaints",
-            "data": resolvedComplaints
-          }
-        ];
-     
-        var response = {
-          "dataset" : dataset,
-          "categories" : monthArray
-        };
-      });
-    }
-
-//create express app and get logged complaints for charting
-//var app = express();
-app.get("/loggedComplaints", function(request, response){
-  getData(response);
-});
-
-
 // We'll create a new user by using the User model as a class
 // The "unique" rule in the User model's schema will prevent duplicate users from being added to the server
 var exampleUser = new User({
@@ -133,7 +68,7 @@ exampleUser.save(function(error, doc) {
 // ======
 
 // Route to see complaints added
-app.get("/complaints", function(req, res) {
+app0.get("/complaints", function(req, res) {
   // Find all complaints in the complaint collection with our Complaint model
   Complaint.find({}, function(error, doc) {
     // Send any errors to the browser
@@ -149,7 +84,7 @@ app.get("/complaints", function(req, res) {
 
 
 // Route to see what user looks like without populating
-app.get("/user", function(req, res) {
+app0.get("/user", function(req, res) {
   // Find all users in the user collection with our User model
   User.find({}, function(error, doc) {
     // Send any errors to the browser
@@ -164,7 +99,7 @@ app.get("/user", function(req, res) {
 });
 
 // New complaint creation via POST route
-app.post("/submit", function(req, res) {
+app0.post("/submit", function(req, res) {
   // Use our Complaint model to make a new complaint from the req.body
   var newComplaint = new Complaint(req.complaintinput);
   // Save the new complaint to mongoose
@@ -191,7 +126,7 @@ app.post("/submit", function(req, res) {
 });
 
 // Route to see what user looks like WITH populating
-app.get("/populateduser", function(req, res) {
+app0.get("/populateduser", function(req, res) {
   // Prepare a query to find all users..
   User.find({})
     // ..and on top of that, populate the complaints (replace the objectIds in the complaints array with bona-fide complaints)
@@ -210,6 +145,6 @@ app.get("/populateduser", function(req, res) {
 });
 
 // Listen on Port 3000
-app.listen(3000, function() {
+app0.listen(3000, function() {
   console.log("App running on port 3000!");
 });

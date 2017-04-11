@@ -122,9 +122,67 @@ In order to develop the REST API, we follow the steps below:
     * We expose the REST API at the URL /loggedComplaints. We will modify the getData() method by adding an additional parameter to the method. This additional parameter is the response object. We are going to write the JSON object created in getData() method to the response object so that it is sent to the client invoking the API.
   * Launch the express app on a port
 
-  The server is up on http://localhost:3300 and when we open the URL http://localhost:3300/loggedCompaints in the browser, we find the JSON response of the API.
+  The server is up on http://localhost:3300 and when we open the URL http://localhost:3300/loggedComplaints in the browser, we find the JSON response of the API.
 
+## Creating views for rendering the chart
 
+### Handlebars Template Engine
 
+The back-end is, so we will now build the views for rendering the chart. We are going to use the Handlebars template engine which will help us create dynamic HTML views. 
+
+* To get handlebars working with Express we need to install a node package ```express-handlebars```. This will help us to invoke the templates from express code. 
+* Install the package by running the command: ```npm install express-handlebars```.
+
+* Create the required templates in a views directory. 
+  * This base template is commonly called main.handlebars. 
+  * Render other templates within this layout file. 
+  * Place the base template within the layouts folder.
+
+* The layout template would be referring to a JavaScript resource: ```complaintcharts.js``` which is placed under public/js folder.
+  * This JavaScript resource is where we are going to add our code to get data from backend and render that in a chart.
+  * [FusionCharts template](http://www.fusioncharts.com/dev/using-with-server-side-languages/tutorials/creating-interactive-charts-using-node-express-and-mongodb.html#step-1--import-the-express-and-mongodb-packages-to-be-used-in-the-application)  would be used in this project
+  * All the FusionCharts JavaScript library would be placed in this folder.
+* The template that will contain the chart is called ```chart.handlebars```. 
+  * In this template we will show the data both in tabular as well as graphical format. 
+
+* In server.js, 
+  * Setup handlebars template engine with main.handlebars as default layout.
+
+Defining an endpoint to serve static resources like JavaScript resources
+
+A new endpoint to render the view:
+
+Let us work on building the JavaScript code for making an AJAX call to get the data as shown below:
+
+We will build chart.handlebars in two parts:
+
+Build the relevant HTML to display the fuel price in a tabular form
+Build the JavaScript and HTML to display the fuel price in a line chart
+Build the relevant HTML to display the fuel price in a tabular form
+
+The aim of this HTML is to display the data in a tabular form as shown below:
+
+And for this we will make use of Handlebars template at the client side i.e we will process the handlebars templates in the client with the data we received after making an AJAX call to the server. Let us define the Handlebars template within in the <script> tag in the chart.handlebars file as shown below:
+
+The placeholders identified by are handlebar constructs. Let us get back to the JavaScript AJAX call we had made. Within the success function we will use Handlebars.compile() to compile the client side template and then invoke the compiled template with the data obtained from server as shown below:
+
+If you want to see the app we have built so far in action, just run the following command from the app directory: node server.js. You will see Server up: http://localhost:3300 printed. Open the URL http://localhost:3300/ to see the table as shown in the below image:
+
+Build the JavaScript and HTML to display the fuel price in a line chart
+
+In this section we will add code for rendering the chart. Let us build the chart step-by-step as shown below:
+
+Create chart properties object
+
+Create categories array object
+
+Create FusionCharts object for multiseries line
+
+Render the chart using the render() API.
+
+Let us load the URL http://localhost:3300/ in the browser to see both table and chart being displayed as shown in the image below:
+
+## Build a Chat Application with ReactJS/NodeJS/Socket.IO
+* Start a new project - create a new folder: ReactApp
 
 

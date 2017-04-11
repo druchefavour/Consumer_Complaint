@@ -170,17 +170,19 @@ If you want to see the app we have built so far in action, just run the followin
 
 Build the JavaScript and HTML to display the fuel price in a line chart
 
-In this section we will add code for rendering the chart. Let us build the chart step-by-step as shown below:
+In this section we will add code for rendering the chart. 
 
-Create chart properties object
+* Build the chart step-by-step as shown below:
 
-Create categories array object
+* Create chart properties object
 
-Create FusionCharts object for multiseries line
+* Create categories array object
 
-Render the chart using the render() API.
+* Create FusionCharts object for multiseries line
 
-Let us load the URL http://localhost:3300/ in the browser to see both table and chart being displayed as shown in the image below:
+* Render the chart using the render() API.
+
+* Load the URL http://localhost:3300/ in the browser to see both table and chart being displayed
 
 # React App
 ## Build a Chat Application with ReactJS/NodeJS/Socket.IO
@@ -192,5 +194,14 @@ Let us load the URL http://localhost:3300/ in the browser to see both table and 
   * express
   * socket.io
 * Create server.js
+  * Require all the dependencies
+  * Set up socket.io to receive and send messages like would be done in a chat room
+  * Listen to the server at port 3000.
+### Index.html
+* Import all the libraries that are required in the html file [
+cdn library](https://cdnjs.com/libraries/react)
+* Create a <div> inside the body tag and give it an id chat
+### React Part
+* Create a new file called ```chat-component.js```
 
 

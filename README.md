@@ -203,5 +203,18 @@ cdn library](https://cdnjs.com/libraries/react)
 * Create a <div> inside the body tag and give it an id chat
 ### React Part
 * Create a new file called ```chat-component.js```
+* Inside ``chat-component.js``` create a variable and set it as React.createClass (call is ChatApp)
+* Inside the class, create a render object
+* Inside the render object, return a div tag
+* Render the entire class in a DOM using reactDOM.render
+### index.html
+* In the ```index.html```
+ file, load ```chat-component.js``` (set the script type to text babel)
+* Back to ``chat-component.js```, set the initial state by using the getInitialState function 
+* Return an object (messages) which is set to a blank array
+* Set socket as the initial function
+* For this to run, we need to load the socket.io library [socket.io](https://cdnjs.com/libraries/socket.io)
+* Mount the connection and make sure that the chat is sending the information. Use componentDidMount function on this.state. So when the component mounts we send a test to see whether the app is working.
+* Go back to ```server.js`` and set the connection to socket
 
 
